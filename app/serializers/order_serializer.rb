@@ -10,24 +10,24 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def pizzas
-    object.pizzas.map do |pizza|
+    object.order_pizzas.map do |order_pizza|
       {
-        id: pizza.id,
-        name: pizza.name,
-        size: pizza.size,
-        price: pizza.price,
-        crust: pizza.crust.as_json(only: %i[id name]),
-        toppings: pizza.toppings.map { |topping| topping.as_json(only: %i[id name]) }
+        id: order_pizza.id,
+        name: order_pizza.pizza.name,
+        size: order_pizza.pizza.size,
+        price: order_pizza.price,
+        crust: order_pizza.crust.as_json(only: %i[id name]),
+        toppings: order_pizza.order_toppings.map { |order_topping| order_topping.topping.as_json(only: %i[id name]) }
       }
     end
   end
 
   def sides
-    object.sides.map do |side|
+    object.order_sides.map do |order_side|
       {
-        id: side.id,
-        name: side.name,
-        price: side.price
+        id: order_side.id,
+        name: order_side.side.name,
+        price: order_side.price
       }
     end
   end

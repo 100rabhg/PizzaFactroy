@@ -14,13 +14,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+
+    side_ids = params[:order][:side_ids]
+    order.sides << Side.where(id: side_ids) if side_ids.present?
+
+    if order.update(order_params)
+      render json: order, status: :created
+    else
+      render json: order.errors, status: :unprocessable_entity
+    end
+  end
+
   def update_status
     order = Order.find_by(id: params[:id])
 
     if order&.update(status: params[:status])
       render json: order, status: :ok
     else
-      render json: { error: order&.errors || "Order not found" }, status: :unprocessable_entity
+      render json: { error: order.errors || 'Order not found' }, status: :unprocessable_entity
     end
   end
 
@@ -28,15 +41,15 @@ class OrdersController < ApplicationController
     order = Order.find_by(id: params[:id])
 
     if order
-      render json: format_order(order), status: :ok
+      render json: order, status: :ok
     else
-      render json: { error: "Order not found" }, status: :not_found
+      render json: { error: 'Order not found' }, status: :not_found
     end
   end
 
   private
 
-    def order_params
+  def order_params
     params.require(:order).permit(
       :customer_name,
       :status,
@@ -44,5 +57,4 @@ class OrdersController < ApplicationController
       side_ids: []
     )
   end
-
 end

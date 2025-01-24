@@ -16,17 +16,41 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
 
   create_table "crusts", force: :cascade do |t|
     t.string "name"
+    t.integer "stock_qunantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "stock"
   end
 
-  create_table "inventories", force: :cascade do |t|
-    t.string "item_type"
-    t.integer "item_id"
-    t.integer "quantity"
+  create_table "order_pizzas", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "pizza_id", null: false
+    t.bigint "crust_id", null: false
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["crust_id"], name: "index_order_pizzas_on_crust_id"
+    t.index ["order_id"], name: "index_order_pizzas_on_order_id"
+    t.index ["pizza_id"], name: "index_order_pizzas_on_pizza_id"
+  end
+
+  create_table "order_sides", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "side_id", null: false
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_sides_on_order_id"
+    t.index ["side_id"], name: "index_order_sides_on_side_id"
+  end
+
+  create_table "order_toppings", force: :cascade do |t|
+    t.bigint "order_pizza_id", null: false
+    t.bigint "topping_id", null: false
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_pizza_id"], name: "index_order_toppings_on_order_pizza_id"
+    t.index ["topping_id"], name: "index_order_toppings_on_topping_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -37,44 +61,37 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pizza_toppings", force: :cascade do |t|
-    t.bigint "pizza_id", null: false
-    t.bigint "topping_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pizza_id"], name: "index_pizza_toppings_on_pizza_id"
-    t.index ["topping_id"], name: "index_pizza_toppings_on_topping_id"
-  end
-
   create_table "pizzas", force: :cascade do |t|
     t.string "name"
-    t.string "category"
-    t.string "size"
+    t.integer "category"
+    t.integer "size"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_id"
-    t.integer "crust_id"
   end
 
   create_table "sides", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
+    t.integer "stock_qunantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_id"
-    t.integer "stock"
   end
 
   create_table "toppings", force: :cascade do |t|
     t.string "name"
-    t.string "category"
+    t.integer "category"
     t.decimal "price"
+    t.integer "stock_qunantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "stock"
   end
 
-  add_foreign_key "pizza_toppings", "pizzas"
-  add_foreign_key "pizza_toppings", "toppings"
+  add_foreign_key "order_pizzas", "crusts"
+  add_foreign_key "order_pizzas", "orders"
+  add_foreign_key "order_pizzas", "pizzas"
+  add_foreign_key "order_sides", "orders"
+  add_foreign_key "order_sides", "sides"
+  add_foreign_key "order_toppings", "order_pizzas"
+  add_foreign_key "order_toppings", "toppings"
 end

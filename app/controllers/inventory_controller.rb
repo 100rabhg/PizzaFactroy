@@ -23,8 +23,8 @@ class InventoryController < ApplicationController
     items.each do |item_data|
       item = model.find(item_data[:id])
 
-      new_stock = Integer(item_data[:stock]) rescue nil
-      if new_stock.nil? || new_stock < 0
+      new_stock = item_data[:stock].to_i
+      if new_stock.nil? || new_stock.negative?
         raise ActiveRecord::RecordInvalid, "#{model.name} ID #{item.id} stock value must be a non-negative integer"
       end
 

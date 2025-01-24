@@ -1,3 +1,7 @@
 class Side < ApplicationRecord
-   has_and_belongs_to_many :orders
+  has_many :order_sides
+  has_many :order, through: :order_sides
+
+  validates :name, presence: true
+  validates :price, presence: true
 end
