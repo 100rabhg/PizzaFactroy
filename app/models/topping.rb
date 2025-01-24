@@ -1,4 +1,5 @@
 class Topping < ApplicationRecord
-  has_many :pizza_toppings
-  has_many :pizzas, through: :pizza_toppings
+  has_many :order_toppings
+
+  enum category: %i[veg non_veg other]
 end

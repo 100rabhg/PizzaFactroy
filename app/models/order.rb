@@ -1,13 +1,9 @@
 class Order < ApplicationRecord
-  has_many :pizzas
-  has_many :sides
+  has_many :order_pizzas, dependent: :destroy
+  accepts_nested_attributes_for :order_pizzas
 
-  def total_price
-    pizzas_total = pizzas.sum do |pizza|
-      (pizza.price || 0) + pizza.toppings.sum { |topping| topping.price || 0 }
-    end
+  has_and_belongs_to_many :order_sides
+  accepts_nested_attributes_for :order_sides
 
-    sides_total = sides.sum { |side| side.price || 0 }
-    pizzas_total + sides_total
-  end
+  enum status: %i[pending confirmed accept]
 end

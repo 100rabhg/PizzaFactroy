@@ -8,7 +8,7 @@ class InventoryController < ApplicationController
       update_inventory_items(params[:sides], Side) if params[:sides].present?
     end
 
-    render json: { message: 'Inventory updated successfully!' }, status: :ok
+    render json: { message: "Inventory updated successfully!" }, status: :ok
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: "Item not found: #{e.message}" }, status: :unprocessable_entity
   rescue ActiveRecord::RecordInvalid => e
