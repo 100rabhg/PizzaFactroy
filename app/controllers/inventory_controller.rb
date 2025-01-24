@@ -8,7 +8,7 @@ class InventoryController < ApplicationController
       update_inventory_items(params[:sides], Side) if params[:sides].present?
     end
 
-    render json: { message: 'Inventory updated successfully!' }, status: :ok
+    render json: { message: "Inventory updated successfully!" }, status: :ok
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: "Item not found: #{e.message}" }, status: :unprocessable_entity
   rescue ActiveRecord::RecordInvalid => e
@@ -23,8 +23,8 @@ class InventoryController < ApplicationController
     items.each do |item_data|
       item = model.find(item_data[:id])
 
-      new_stock = item_data[:stock].to_i
-      if new_stock.nil? || new_stock.negative?
+      new_stock = Integer(item_data[:stock]) rescue nil
+      if new_stock.nil? || new_stock < 0
         raise ActiveRecord::RecordInvalid, "#{model.name} ID #{item.id} stock value must be a non-negative integer"
       end
 
