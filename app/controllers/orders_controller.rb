@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  
   def create
     order = Order.new(order_params)
 
-    side_ids = params[:order][:side_ids]
-    order.sides << Side.where(id: side_ids) if side_ids.present?
+    if params[:order][:side_ids].present?
+      order.sides = Side.where(id: params[:order][:side_ids].uniq) # Avoid duplicates
+    end
 
     if order.save
       render json: order, status: :created
@@ -15,12 +16,21 @@ class OrdersController < ApplicationController
   end
 
   def update_status
-    order = Order.find_by(id: params[:id])
+    order = Order.find(params[:id])
 
-    if order&.update(status: params[:status])
-      render json: order, status: :ok
+    if params[:status] == 'approved'
+      begin
+        order.update!(status: 'approved')
+        render json: { message: 'Order approved and stock deducted', order: order }, status: :ok
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { error: e.message }, status: :unprocessable_entity
+      end
     else
-      render json: { error: order&.errors || "Order not found" }, status: :unprocessable_entity
+      if order.update(status: params[:status])
+        render json: { message: 'Order status updated', order: order }, status: :ok
+      else
+        render json: order.errors, status: :unprocessable_entity
+      end
     end
   end
 
