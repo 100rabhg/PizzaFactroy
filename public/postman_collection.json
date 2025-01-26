@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "3c761af7-da75-48bf-b05b-b200c7b9b524",
+		"name": "Pizza_Factory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27382035",
+		"_collection_link": "https://red-spaceship-281877.postman.co/workspace/My-Workspace~972d05ca-a2f9-447c-8136-c61fce5c41bd/collection/27382035-3c761af7-da75-48bf-b05b-b200c7b9b524?action=share&source=collection_link&creator=27382035"
+	},
+	"item": [
+		{
+			"name": "Crust",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/crusts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"crusts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/crusts/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"crusts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wheat thin crust\",\n    \"stock_quantity\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/crusts/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"crusts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Testing Crust\",\n    \"stock_quantity\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/crusts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"crusts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Side",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sides",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sides/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sides",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wheat thin crust\",\n    \"stock_quantity\": 10,\n    \"price\": 120\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sides/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sides",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Testing Side\",\n    \"stock_quantity\": 5,\n    \"price\": 111\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sides",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sides"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Topping",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/toppings",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"toppings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/toppings/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"toppings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Capsicum\",\n    \"category\": \"non_veg\",\n    \"price\": \"30.0\",\n    \"stock_quantity\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/toppings/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"toppings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"name\": \"Testing Topping\",\n    \"category\": \"non-veg\",\n    \"price\": \"28.0\",\n    \"stock_quantity\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/toppings",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"toppings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pizza",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pizzas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pizzas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pizzas/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pizzas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Deluxe Veggie\",\n    \"category\": \"veg\",\n    \"size\": \"large\",\n    \"price\": \"180.0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pizzas/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pizzas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Deluxe Veggie\",\n    \"category\": \"veg\",\n    \"size\": \"medium\",\n    \"price\": \"200.0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pizzas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pizzas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/orders/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order\": {\n        \"customer_name\": \"Cus-1\",\n        \"status\": \"confirmed\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order\": {\n        \"customer_name\": \"Cus-1\",\n        \"order_pizzas_attributes\": [\n            {\n                \"pizza_id\": 10,\n                \"crust_id\": 1,\n                \"order_toppings_attributes\": [\n                    {\"topping_id\": 1},\n                    {\"topping_id\": 3},\n                    {\"topping_id\": 6},\n                    {\"topping_id\": 7}\n                ]\n            },\n            {\n                \"pizza_id\": 3,\n                \"crust_id\": 2,\n                \"order_toppings_attributes\": [\n                    {\"topping_id\": 1},\n                    {\"topping_id\": 2},\n                    {\"topping_id\": 6}\n                ]\n            }\n        ],\n        \"order_sides_attributes\": [\n            {\"side_id\": 1},\n            {\"side_id\": 2}\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/menu",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
