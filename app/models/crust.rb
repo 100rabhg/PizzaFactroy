@@ -1,3 +1,4 @@
 class Crust < ApplicationRecord
-  has_many :pizzas
+  validates :name, presence: true
+  validates :stock_quantity, presence: true
 end

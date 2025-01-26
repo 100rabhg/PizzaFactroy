@@ -4,7 +4,7 @@ class CreateToppings < ActiveRecord::Migration[7.1]
       t.string :name
       t.integer :category
       t.decimal :price
-      t.integer :stock_qunantity
+      t.integer :stock_quantity
 
       t.timestamps
     end

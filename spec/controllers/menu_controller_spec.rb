@@ -3,33 +3,27 @@ require 'rails_helper'
 RSpec.describe MenuController, type: :controller do
   describe 'GET #index' do
     before do
-      crust = Crust.create!(name: 'Thin Crust')
-      order = Order.create!(status: 'Pending') # Replace with valid attributes for Order
-
-      @pizza = Pizza.create!(name: 'Margherita', price: 10.0, crust: crust, order: order)
-      @topping = Topping.create!(name: 'Cheese', price: 2.0)
-      @side = Side.create!(name: 'Garlic Bread', price: 5.0)
-    end
-
-    it 'returns a successful response' do
-      get :index
-      expect(response).to have_http_status(:ok)
+      @crust = Crust.create!(name: 'New hand tossed', stock_quantity: 5)
+      @pizza = Pizza.create!(name: 'Deluxe Veggie', category: :veg, size: :regular, price: 150)
+      @topping = Topping.create!(name: 'Extra cheese', price: 35, category: :other, stock_quantity: 5)
+      @side = Side.create!(name: 'Cold drink', price: 55, stock_quantity: 5)
     end
 
     it 'returns the correct JSON structure' do
       get :index
 
+      expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body)
 
       expect(json_response).to include(
         'pizzas' => [
-          hash_including('id' => @pizza.id, 'name' => @pizza.name, 'price' => @pizza.price.to_s)
+          hash_including('id' => @pizza.id, 'name' => @pizza.name, 'category' => @pizza.category, 'size' => @pizza.size, 'price' => @pizza.price.to_s)
         ],
         'crusts' => [
-          hash_including('id' => @pizza.crust.id, 'name' => @pizza.crust.name)
+          hash_including('id' => @crust.id, 'name' => @crust.name)
         ],
         'toppings' => [
-          hash_including('id' => @topping.id, 'name' => @topping.name, 'price' => @topping.price.to_s)
+          hash_including('id' => @topping.id, 'name' => @topping.name, 'category' => @topping.category, 'price' => @topping.price.to_s)
         ],
         'sides' => [
           hash_including('id' => @side.id, 'name' => @side.name, 'price' => @side.price.to_s)

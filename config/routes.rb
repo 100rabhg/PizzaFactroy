@@ -7,14 +7,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-    get '/menu', to: 'menu#index'
-    patch '/inventory', to: 'inventory#update'
-
-    resources :pizzas, only: [:index, :create, :show]
-      resources :orders do
-    member do
-      patch :update_status
-      patch :confirm
-    end
-  end
+  resources :menu, only: :index
+  resources :crusts, only: %i[index create update show]
+  resources :orders, only: %i[create update show]
+  resources :pizzas, only: %i[index create update show]
+  resources :sides, only: %i[index create update show]
+  resources :toppings, only: %i[index create update show]
 end

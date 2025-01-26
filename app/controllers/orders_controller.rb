@@ -1,60 +1,24 @@
 class OrdersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
-  def create
-    order = Order.new(order_params)
-
-    side_ids = params[:order][:side_ids]
-    order.sides << Side.where(id: side_ids) if side_ids.present?
-
-    if order.save
-      render json: order, status: :created
-    else
-      render json: order.errors, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    order = Order.find(params[:id])
-
-    side_ids = params[:order][:side_ids]
-    order.sides << Side.where(id: side_ids) if side_ids.present?
-
-    if order.update(order_params)
-      render json: order, status: :created
-    else
-      render json: order.errors, status: :unprocessable_entity
-    end
-  end
-
-  def update_status
-    order = Order.find_by(id: params[:id])
-
-    if order&.update(status: params[:status])
-      render json: order, status: :ok
-    else
-      render json: { error: order.errors || 'Order not found' }, status: :unprocessable_entity
-    end
-  end
-
-  def show
-    order = Order.find_by(id: params[:id])
-
-    if order
-      render json: order, status: :ok
-    else
-      render json: { error: 'Order not found' }, status: :not_found
-    end
-  end
+  include CrudController
 
   private
 
-  def order_params
+  def model
+    Order
+  end
+
+  def response_object(order)
+    render json: order
+  end
+
+  def permitted_params
     params.require(:order).permit(
-      :customer_name,
-      :status,
-      pizzas_attributes: [:name, :category, :size, :price, :crust_id, topping_ids: []],
-      side_ids: []
+      :customer_name, :status,
+      order_pizzas_attributes: [
+        :id, :pizza_id, :crust_id, :_destroy,
+        { order_toppings_attributes: %i[id topping_id _destroy] }
+      ],
+      order_sides_attributes: %i[id side_id _destroy]
     )
   end
 end

@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
 
   create_table "crusts", force: :cascade do |t|
     t.string "name"
-    t.integer "stock_qunantity"
+    t.integer "stock_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
   create_table "orders", force: :cascade do |t|
     t.string "customer_name"
     t.decimal "total_price"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
   create_table "sides", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
-    t.integer "stock_qunantity"
+    t.integer "stock_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_183727) do
     t.string "name"
     t.integer "category"
     t.decimal "price"
-    t.integer "stock_qunantity"
+    t.integer "stock_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
